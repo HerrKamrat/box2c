@@ -59,7 +59,13 @@
 	#define B2_COMPILER_MSVC
 #endif
 
-#if defined(B2_COMPILER_MSVC)
+#if defined(B2_PLATFORM_WASM)
+	#define B2_BREAKPOINT                                                                                                        \
+		do                                                                                                                       \
+		{                                                                                                                        \
+		}                                                                                                                        \
+		while (0)
+#elif defined(B2_COMPILER_MSVC)
 	#define B2_BREAKPOINT __debugbreak()
 #elif defined(B2_COMPILER_GCC) || defined(B2_COMPILER_CLANG)
 	#if defined(B2_CPU_X64)
@@ -67,12 +73,6 @@
 	#elif defined(B2_CPU_ARM)
 		#define B2_BREAKPOINT __builtin_trap()
 	#endif
-#elif defined(B2_PLATFORM_WASM)
-	#define B2_BREAKPOINT                                                                                                        \
-		do                                                                                                                       \
-		{                                                                                                                        \
-		}                                                                                                                        \
-		while (0)
 #else
 	#error Unknown platform
 #endif
