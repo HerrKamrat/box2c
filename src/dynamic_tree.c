@@ -1012,7 +1012,7 @@ int32_t b2DynamicTree_GetMaxBalance(const b2DynamicTree* tree)
 
 		int32_t child1 = node->child1;
 		int32_t child2 = node->child2;
-		int32_t balance = b2AbsFloat(tree->nodes[child2].height - tree->nodes[child1].height);
+		int32_t balance = b2AbsInt(tree->nodes[child2].height - tree->nodes[child1].height);
 		maxBalance = b2MaxInt(maxBalance, balance);
 	}
 
@@ -1117,7 +1117,7 @@ int b2DynamicTree_GetByteCount(const b2DynamicTree* tree)
 }
 
 void b2DynamicTree_Query(const b2DynamicTree* tree, b2AABB aabb, uint32_t maskBits, b2TreeQueryCallbackFcn* callback,
-								 void* context)
+						 void* context)
 {
 	int32_t stack[b2_treeStackSize];
 	int32_t stackCount = 0;
